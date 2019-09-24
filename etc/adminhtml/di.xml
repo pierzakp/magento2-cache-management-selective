@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Backend\Block\Cache">
+        <plugin name="pierzakp_cachemanagementselective_add_flush_invalidated_cache_button"
+                type="Pierzakp\CacheManagementSelective\Plugin\Block\Backend\Cache\AddFlushInvalidatedCacheButton"
+                sortOrder="10"/>
+        <plugin name="pierzakp_cachemanagementselective_update_flush_magento_cache_button"
+                type="Pierzakp\CacheManagementSelective\Plugin\Block\Backend\Cache\UpdateFlushMagentoCacheButton"
+                sortOrder="20"/>
+    </type>
+</config>

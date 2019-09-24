@@ -61,7 +61,8 @@ class AddFlushInvalidatedCacheButtonTest extends TestCase
 
     public function testBeforeSetLayoutWhenAllowed(): void
     {
-        $this->authorization->method('isAllowed')
+        $this->authorization->expects($this->once())
+            ->method('isAllowed')
             ->willReturn(\true);
 
         $url = 'https://example.com/admin/pierzakp_cache/index/flushInvalidated';
@@ -86,7 +87,8 @@ class AddFlushInvalidatedCacheButtonTest extends TestCase
 
     public function testBeforeSetLayoutWhenDisallowed(): void
     {
-        $this->authorization->method('isAllowed')
+        $this->authorization->expects($this->once())
+            ->method('isAllowed')
             ->willReturn(\false);
 
         $this->subject->expects($this->never())

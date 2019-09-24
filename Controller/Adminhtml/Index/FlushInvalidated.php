@@ -70,7 +70,7 @@ class FlushInvalidated extends Action
         } catch (Exception $e) {
             $this->messageManager->addExceptionMessage(
                 $e,
-                \__('An error occurred while refreshing cache.')
+                \__('An error occurred while flushing invalidated cache.')
             );
         }
 

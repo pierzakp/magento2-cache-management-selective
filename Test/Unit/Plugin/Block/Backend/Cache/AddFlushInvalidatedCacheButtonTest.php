@@ -49,9 +49,6 @@ class AddFlushInvalidatedCacheButtonTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->urlBuilder->method('getUrl')
-            ->willReturn('string');
-
         $this->subject = $this->getMockBuilder(Subject::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -67,8 +64,22 @@ class AddFlushInvalidatedCacheButtonTest extends TestCase
         $this->authorization->method('isAllowed')
             ->willReturn(\true);
 
+        $url = 'https://example.com/admin/pierzakp_cache/index/flushInvalidated';
+        $this->urlBuilder->expects($this->once())
+            ->method('getUrl')
+            ->with('pierzakp_cache/index/flushInvalidated')
+            ->willReturn($url);
+
         $this->subject->expects($this->once())
-            ->method('addButton');
+            ->method('addButton')
+            ->with(
+                'flush_invalidated_cache',
+                [
+                    'label' => __('Flush Invalidated Cache'),
+                    'onclick' => 'setLocation(\'' . $url . '\')',
+                    'class' => 'primary flush-cache-magento',
+                ]
+            );
 
         $this->object->beforeSetLayout($this->subject);
     }

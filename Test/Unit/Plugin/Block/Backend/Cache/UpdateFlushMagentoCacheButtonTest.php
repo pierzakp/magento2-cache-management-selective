@@ -36,7 +36,12 @@ class UpdateFlushMagentoCacheButtonTest extends TestCase
     public function testBeforeSetLayout(): void
     {
         $this->subject->expects($this->once())
-            ->method('updateButton');
+            ->method('updateButton')
+            ->with(
+                'flush_magento',
+                'class',
+                'flush-cache-storage'
+            );
 
         $this->object->beforeSetLayout($this->subject);
     }

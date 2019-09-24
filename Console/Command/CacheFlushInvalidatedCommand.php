@@ -48,6 +48,8 @@ class CacheFlushInvalidatedCommand extends Command
      * @param OutputInterface $output
      *
      * @return int
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -57,16 +59,14 @@ class CacheFlushInvalidatedCommand extends Command
             $this->cacheManagement->flushInvalidatedTypes();
 
             $output->writeln(\sprintf(
-                '<info>%s</info>',
-                \__(
-                    'Following invalidated cache types has been flushed: %1.',
-                    \implode(', ', $invalidatedTypes)
-                )
+                '<info>%s %s</info>',
+                'Following invalidated cache types has been flushed:',
+                \implode(', ', $invalidatedTypes)
             ));
         } else {
             $output->writeln(\sprintf(
                 '<info>%s</info>',
-                \__('There are no invalidated cache types to be flushed.')
+                'There are no invalidated cache types to be flushed'
             ));
         }
 

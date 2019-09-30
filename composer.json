@@ -22,6 +22,10 @@
         "magento/framework": "^101.0.0",
         "magento/module-backend": "100.2.*"
     },
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "magento/magento2-functional-testing-framework": "2.4.*"
+    },
     "autoload": {
         "files": [
             "registration.php"

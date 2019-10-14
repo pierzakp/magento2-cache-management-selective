@@ -77,6 +77,6 @@ class FlushInvalidated extends Action
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
-        return $resultRedirect->setPath('adminhtml/cache/index');
+        return $resultRedirect->setRefererUrl();
     }
 }

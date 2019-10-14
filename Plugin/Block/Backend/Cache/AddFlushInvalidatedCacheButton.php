@@ -5,7 +5,7 @@ namespace Pierzakp\CacheManagementSelective\Plugin\Block\Backend\Cache;
 
 use Magento\Backend\Block\Cache as Subject;
 use Magento\Framework\AuthorizationInterface;
-use Magento\Framework\UrlInterface;
+use Pierzakp\CacheManagementSelective\Service\FlushInvalidatedUrl;
 
 /**
  * Plugin object which adds flush invalidated cache button.
@@ -16,21 +16,22 @@ class AddFlushInvalidatedCacheButton
      * @var AuthorizationInterface
      */
     private $authorization;
+
     /**
-     * @var UrlInterface
+     * @var FlushInvalidatedUrl
      */
-    private $urlBuilder;
+    private $urlService;
 
     /**
      * @param AuthorizationInterface $authorization
-     * @param UrlInterface $urlBuilder
+     * @param FlushInvalidatedUrl $urlService
      */
     public function __construct(
         AuthorizationInterface $authorization,
-        UrlInterface $urlBuilder
+        FlushInvalidatedUrl $urlService
     ) {
         $this->authorization = $authorization;
-        $this->urlBuilder = $urlBuilder;
+        $this->urlService = $urlService;
     }
 
     /**
@@ -45,20 +46,10 @@ class AddFlushInvalidatedCacheButton
                 'flush_invalidated_cache',
                 [
                     'label' => __('Flush Invalidated Cache'),
-                    'onclick' => 'setLocation(\'' . $this->getFlushInvalidatedUrl() . '\')',
+                    'onclick' => 'setLocation(\'' . $this->urlService->getUrl() . '\')',
                     'class' => 'primary flush-cache-magento',
                 ]
             );
         }
-    }
-
-    /**
-     * Get url for clean invalidated cache.
-     *
-     * @return string
-     */
-    private function getFlushInvalidatedUrl(): string
-    {
-        return $this->urlBuilder->getUrl('pierzakp_cache/index/flushInvalidated');
     }
 }

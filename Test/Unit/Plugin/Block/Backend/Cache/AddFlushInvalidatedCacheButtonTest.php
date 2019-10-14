@@ -5,10 +5,10 @@ namespace Pierzakp\CacheManagementSelective\Test\Unit\Plugin\Block\Backend\Cache
 
 use Magento\Backend\Block\Cache as Subject;
 use Magento\Framework\AuthorizationInterface;
-use Magento\Framework\UrlInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Pierzakp\CacheManagementSelective\Plugin\Block\Backend\Cache\AddFlushInvalidatedCacheButton;
+use Pierzakp\CacheManagementSelective\Service\FlushInvalidatedUrl;
 
 /**
  * Test case for plugin which adds flush invalidated cache button to admin
@@ -27,25 +27,22 @@ class AddFlushInvalidatedCacheButtonTest extends TestCase
     private $authorization;
 
     /**
-     * @var UrlInterface
+     * @var FlushInvalidatedUrl|MockObject
      */
-    private $urlBuilder;
+    private $urlService;
 
     /**
      * @var Subject|MockObject
      */
     private $subject;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         $this->authorization = $this->getMockBuilder(AuthorizationInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->urlBuilder = $this->getMockBuilder(UrlInterface::class)
+        $this->urlService = $this->getMockBuilder(FlushInvalidatedUrl::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -55,7 +52,7 @@ class AddFlushInvalidatedCacheButtonTest extends TestCase
 
         $this->object = new AddFlushInvalidatedCacheButton(
             $this->authorization,
-            $this->urlBuilder
+            $this->urlService
         );
     }
 
@@ -66,9 +63,8 @@ class AddFlushInvalidatedCacheButtonTest extends TestCase
             ->willReturn(\true);
 
         $url = 'https://example.com/admin/pierzakp_cache/index/flushInvalidated';
-        $this->urlBuilder->expects($this->once())
+        $this->urlService->expects($this->once())
             ->method('getUrl')
-            ->with('pierzakp_cache/index/flushInvalidated')
             ->willReturn($url);
 
         $this->subject->expects($this->once())

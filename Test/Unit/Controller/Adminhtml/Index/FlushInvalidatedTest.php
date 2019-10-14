@@ -60,8 +60,7 @@ class FlushInvalidatedTest extends TestCase
             ->getMock();
 
         $this->redirect->expects($this->once())
-            ->method('setPath')
-            ->with('adminhtml/cache/index')
+            ->method('setRefererUrl')
             ->willReturnSelf();
 
         $this->resultFactory = $this->getMockBuilder(ResultFactory::class)

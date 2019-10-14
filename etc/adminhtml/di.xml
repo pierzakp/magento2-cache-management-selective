@@ -9,4 +9,9 @@
                 type="Pierzakp\CacheManagementSelective\Plugin\Block\Backend\Cache\UpdateFlushMagentoCacheButton"
                 sortOrder="20"/>
     </type>
+    <type name="Magento\AdminNotification\Model\System\Message\CacheOutdated">
+        <plugin name="pierzakp_cachemanagementselective_add_flush_invalidated_cache_link"
+                type="Pierzakp\CacheManagementSelective\Plugin\Model\System\Message\CacheOutdated\AddFlushInvalidatedLink"
+                sortOrder="10"/>
+    </type>
 </config>

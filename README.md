@@ -26,6 +26,8 @@ bin/magento pierzakp:cache:flush-invalidated
 
 It is a simple extension, especially great for merchants!
 
+It includes PHPUnit tests coverage.
+
 ## Preview
 
 #### Flush invalidated cache button:

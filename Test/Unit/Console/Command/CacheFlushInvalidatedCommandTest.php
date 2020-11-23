@@ -45,9 +45,9 @@ class CacheFlushInvalidatedCommandTest extends TestCase
         $commandTester = new CommandTester($this->object);
         $result = $commandTester->execute([]);
 
-        $this->assertContains(
+        $this->assertEquals(
             'There are no invalidated cache types to be flushed',
-            $commandTester->getDisplay()
+            \trim($commandTester->getDisplay())
         );
         $this->assertEquals(
             Cli::RETURN_SUCCESS,
@@ -66,9 +66,9 @@ class CacheFlushInvalidatedCommandTest extends TestCase
         $commandTester = new CommandTester($this->object);
         $result = $commandTester->execute([]);
 
-        $this->assertContains(
+        $this->assertEquals(
             'Following invalidated cache types has been flushed: config, full_page',
-            $commandTester->getDisplay()
+            \trim($commandTester->getDisplay())
         );
         $this->assertEquals(
             Cli::RETURN_SUCCESS,

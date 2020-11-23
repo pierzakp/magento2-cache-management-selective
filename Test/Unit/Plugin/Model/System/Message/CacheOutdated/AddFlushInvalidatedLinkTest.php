@@ -62,10 +62,11 @@ class AddFlushInvalidatedLinkTest extends TestCase
             ->willReturn(\true);
 
         $this->urlService->expects($this->once())
-            ->method('getUrl');
+            ->method('getUrl')
+            ->willReturn('https://example.test');
 
-        $this->assertContains(
-            'click here to flush invalidated cache',
+        $this->assertSame(
+            'Some text. You can also <a href="https://example.test">click here to flush invalidated cache</a> quickly.',
             $this->object->afterGetText($this->subject, 'Some text.')
         );
     }
